@@ -356,6 +356,15 @@ function _mosaico_civix_glob($pattern) {
  * @param array $item - menu you need to insert (parent/child attributes will be filled for you)
  */
 function _mosaico_civix_insert_navigation_menu(&$menu, $path, $item) {
+  if (!empty($item['no_duplicate_entries'])) {
+    $url_pattern = "/(?P<civi_path>civicrm\/.*$)/";
+    $matches = array();
+    preg_match($url_pattern, $item['url'], $matches);
+    if (_mosaico_civicx_find_menu_entry($menu, $matches['civi_path'])) {
+      // This path is already somehwere else, thus we are aborting the add process here
+      return;
+    }
+  }
   // If we are done going down the path, insert menu
   if (empty($path)) {
     $menu[] = array(
@@ -424,6 +433,30 @@ function _mosaico_civix_fixNavigationMenuItems(&$nodes, &$maxNavID, $parentID) {
       _mosaico_civix_fixNavigationMenuItems($nodes[$origKey]['child'], $maxNavID, $nodes[$origKey]['attributes']['navID']);
     }
   }
+}
+
+/**
+ * Searches the menu for a specific url
+ *
+ * @param $menu
+ * @param $url
+ *
+ * @return bool, true if entry is found
+ */
+function _mosaico_civicx_find_menu_entry($menu, $url) {
+  $found = FALSE;
+  foreach ($menu as $key => $entry) {
+    if ($entry['attributes']['url'] === $url) {
+      return True;
+    }
+    if (isset($entry['child'])) {
+       $found = _mosaico_civicx_find_menu_entry($entry['child'], $url);
+       if ($found) {
+         return $found;
+       }
+    }
+  }
+  return $found;
 }
 
 /**

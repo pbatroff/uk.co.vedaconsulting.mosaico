@@ -142,6 +142,7 @@ function mosaico_civicrm_navigationMenu(&$params) {
     'child' => array(),
     'operator' => 'AND',
     'separator' => 0,
+    'no_duplicate_entries' => 1,
     'url' => CRM_Utils_System::url('civicrm/a/', NULL, TRUE, '/mosaico-template'),
   ));
 
