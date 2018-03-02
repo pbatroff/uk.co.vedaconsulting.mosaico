@@ -359,6 +359,7 @@ function _mosaico_civix_insert_navigation_menu(&$menu, $path, $item) {
   if (!empty($item['no_duplicate_entries'])) {
     $entry = _mosaico_civicx_find_menu_entry($menu, $item['url']);
     if (!empty($entry)) {
+      // convention is to put an absolute path in the manual entry (HBS)
       // This path is already somewhere else, thus we are aborting the add process here
       return;
     }
