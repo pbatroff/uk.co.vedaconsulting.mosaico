@@ -357,11 +357,9 @@ function _mosaico_civix_glob($pattern) {
  */
 function _mosaico_civix_insert_navigation_menu(&$menu, $path, $item) {
   if (!empty($item['no_duplicate_entries'])) {
-    $url_pattern = "/(?P<civi_path>civicrm\/.*$)/";
-    $matches = array();
-    preg_match($url_pattern, $item['url'], $matches);
-    if (_mosaico_civicx_find_menu_entry($menu, $matches['civi_path'])) {
-      // This path is already somehwere else, thus we are aborting the add process here
+    $entry = _mosaico_civicx_find_menu_entry($menu, $item['url']);
+    if (!empty($entry)) {
+      // This path is already somewhere else, thus we are aborting the add process here
       return;
     }
   }
@@ -441,22 +439,20 @@ function _mosaico_civix_fixNavigationMenuItems(&$nodes, &$maxNavID, $parentID) {
  * @param $menu
  * @param $url
  *
- * @return bool, true if entry is found
+ * @return Entry, or NULL if not found
  */
 function _mosaico_civicx_find_menu_entry($menu, $url) {
-  $found = FALSE;
   foreach ($menu as $key => $entry) {
     if ($entry['attributes']['url'] === $url) {
-      return True;
+      return $entry['attributes'];
     }
     if (isset($entry['child'])) {
-       $found = _mosaico_civicx_find_menu_entry($entry['child'], $url);
-       if ($found) {
-         return $found;
+       if (_mosaico_civicx_find_menu_entry($entry['child'], $url)) {
+         return $entry['attributes'];
        }
     }
   }
-  return $found;
+  return NULL;
 }
 
 /**
