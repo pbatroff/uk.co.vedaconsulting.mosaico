@@ -135,7 +135,7 @@ function mosaico_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
 }
 
 function mosaico_civicrm_navigationMenu(&$params) {
-  _mosaico_civix_insert_navigation_menu($params, 'Mailings', array(
+  _mosaico_civix_insert_navigation_menu($params, 'Administer', array(
     'label' => ts('Mosaico Templates', array('domain' => 'uk.co.vedaconsulting.mosaico')),
     'name' => 'mosaico_templates',
     'permission' => 'edit message templates',
@@ -145,7 +145,7 @@ function mosaico_civicrm_navigationMenu(&$params) {
     'url' => CRM_Utils_System::url('civicrm/a/', NULL, TRUE, '/mosaico-template'),
   ));
 
-  _mosaico_civix_insert_navigation_menu($params, 'Mailings', array(
+  _mosaico_civix_insert_navigation_menu($params, 'Administer', array(
     'label' => ts('New Mailing (Traditional)', array('domain' => 'uk.co.vedaconsulting.mosaico')),
     'name' => 'traditional_mailing',
     'permission' => 'access CiviMail,create mailings',
