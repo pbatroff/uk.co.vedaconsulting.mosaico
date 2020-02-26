@@ -23,7 +23,7 @@
   <requires>
     <ext>org.civicrm.flexmailer</ext>
   </requires>
-  <comments>To help contribute please contact us on support@vedaconsulting.co.uk or initiate a conversation / issue on github.</comments>
+  <comments>To help contribute please contact us on support@vedaconsulting.co.uk or initiate a conversation / issue on github. Systopia version with added functionality for menu entries. See https://github.com/pbatroff/uk.co.vedaconsulting.mosaico/tree/HBS-6439</comments>
   <civix>
     <namespace>CRM/Mosaico</namespace>
   </civix>
